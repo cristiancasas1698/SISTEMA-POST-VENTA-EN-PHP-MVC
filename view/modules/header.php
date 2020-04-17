@@ -38,7 +38,7 @@
             <ul class="dropdown-menu">
                 <li class="user-body">
                     <div class="pull-right">
-                        <a href="" class="btn btn-default btn-flat">salir</a>
+                        <a href="salir" class="btn btn-default btn-flat">salir</a>
                     </div>
                 </li>
             </ul>

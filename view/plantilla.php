@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,11 +77,12 @@ if (isset($_GET["ruta"])) {
   if ($_GET["ruta"] == "home" || 
       ($_GET["ruta"] == "users") ||
        ($_GET["ruta"] == "categories") ||
-         ($_GET["ruta"] == "products") ||
-           ($_GET["ruta"] == "client") ||
-             ($_GET["ruta"] == "sales") ||
-               ($_GET["ruta"] == "create-sales") ||
-                 ($_GET["ruta"] == "report-sales")){  
+        ($_GET["ruta"] == "products") ||
+          ($_GET["ruta"] == "client") ||
+            ($_GET["ruta"] == "sales") ||
+              ($_GET["ruta"] == "create-sales") ||
+                ($_GET["ruta"] == "report-sales") ||
+                 ($_GET["ruta"] == "salir")){  
        
     include "modules/".$_GET["ruta"].".php";
   }else {
