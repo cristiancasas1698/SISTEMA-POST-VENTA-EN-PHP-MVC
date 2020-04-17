@@ -18,31 +18,69 @@
     <!-- Main content -->
     <section class="content">
 
-      <!-- Default box -->
+      
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Title</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
+          <!-- agregando un boton para agregar usuarios -->
+          <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario"> 
+            agregar usuario
+          </button>           
         </div>
         <div class="box-body">
-          Start creating your amazing application!
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>usuario</th>
+                <th>Foto</th>
+                <th>Perfil</th>
+                <th>Estado</th>
+                <th>Ultimo-login</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+              <body>
+                <tr>
+                  <td>1</td>
+                  <td>Ususario Administrador</td>
+                  <td>Admin</td>
+                  <td><img src="view/img/anonymous.png" class="img-thumbnail" width="40px"></td>
+                  <td>Administrador</td>
+                  <td><button class="btn btn-success btn-xs">Activado</button></td>
+                  <td>2020-02-02 12:05:37</td>
+                  <td>
+                    <div class="btn-group">
+                      <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </body>
+          </table>
         </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
-        <!-- /.box-footer-->
       </div>
       <!-- /.box -->
-
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+  <!-- modal para registrar un usuario nuevo -->
+  <div id="modalAgregarUsuario" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
