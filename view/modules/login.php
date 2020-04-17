@@ -27,6 +27,11 @@
       </div>
       <!-- /.col -->
     </div>
+    <?php
+      
+       $login = new ControllerUsers();
+       $login -> ctruser();
+    ?>
   </form>
   <a href="register.html" class="text-center">Register a new membership</a>
 
