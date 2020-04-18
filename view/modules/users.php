@@ -60,26 +60,83 @@
           </table>
         </div>
       </div>
-      <!-- /.box -->
     </section>
-    <!-- /.content -->
   </div>
+
   <!-- modal para registrar un usuario nuevo -->
+
   <div id="modalAgregarUsuario" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
+    <!-- contenido del modal y del titulo-->
+    <div class="modal-content"> 
+
+<!-- form para poder trabajar el formulario de registro -->
+<!-- use multipart/form-datacuando su formulario incluya cualquier <input type="file">elemento -->
+  <form action="" role="form" method="post" enctype="multipart/form-data">
+
+      <div class="modal-header" style="background:#3c8dbc; color:white; ">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Agregar Usuario</h4>
       </div>
+
+     <!-- Cuerpo del modal-->
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <div class="box-body">
+
+          <!-- Campo del Nombre-->
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <input type="text" class="form-control input-lg" name="Nuevonombre" placeholder="ingresar nombre" required>
+            </div>
+          </div>
+
+          <!-- Campo del Nombre de usuario-->
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+              <input type="text" class="form-control input-lg" name="Nuevousuario" placeholder="ingresar usuario" required>
+            </div>
+          </div>
+
+           <!-- Campo de contraseña-->
+           <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+              <input type="password" class="form-control input-lg" name="Nuevopassword" placeholder="ingresar contraseña" required>
+            </div>
+          </div>
+
+          <!-- Campo de perfil !se coloco en un select¡-->
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-users"></i></span>
+              <select name="Nuevoperfil" class="form-control input-lg">
+                <option value="">seleccionar perfil</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Especial">Especial</option>
+                <option value="Vendedor">Vededor</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Campo para Subir la foto-->
+          <div class="form-group"> 
+            <div class="panel">SUBIR FOTO</div>
+            <input type="file" id="Nuevafoto" name="Nuevafoto">
+            <p class="help-block">peso maximo de la foto 200 MB</p>
+            <img src="view/img/anonymous.png" class="img-thumbnail" width="100px">
+          </div>
+
+        </div>  
       </div>
+
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">guardar cambios</button>
       </div>
+  </form>
     </div>
 
   </div>
