@@ -28,6 +28,9 @@ session_start();
   <!-- Theme style -->
   <link rel="stylesheet" href="view/dist/css/AdminLTE.css">
 
+  <!-- DataTables -->
+  <link rel="stylesheet" href="view/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="view/dist/css/skins/_all-skins.min.css">
@@ -48,12 +51,13 @@ session_start();
   <!-- AdminLTE App -->
   <script src="view/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE for demo purposes -->
-<script src="view/dist/js/demo.js"></script>
-<script>
-  $(document).ready(function () {
-    $('.sidebar-menu').tree()
-  })
-</script>
+  <script src="view/dist/js/demo.js"></script>
+  <!-- DataTables -->
+  <script src="view/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="view/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <!-- sweetalert2 -->
+  <script src="view/plugins/sweetalert2/sweetalert2.all.js"></script>
+
 </head>
 
                          <!-- =============================================== -->
@@ -103,8 +107,6 @@ echo '</div>';
 }
 ?>
  
-  
-
 <!-- ./wrapper -->
 <script src="view/js/plantilla.js"></script>
 </body>

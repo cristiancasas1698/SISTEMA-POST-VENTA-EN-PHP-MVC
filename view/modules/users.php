@@ -27,7 +27,7 @@
           </button>           
         </div>
         <div class="box-body">
-          <table class="table table-bordered table-striped">
+          <table class="table table-bordered table-striped datatable">
             <thead>
               <tr>
                 <th>#</th>
@@ -116,7 +116,7 @@
                 <option value="">seleccionar perfil</option>
                 <option value="Administrador">Administrador</option>
                 <option value="Especial">Especial</option>
-                <option value="Vendedor">Vededor</option>
+                <option value="Vendedor">Vendedor</option>
               </select>
             </div>
           </div>
@@ -136,6 +136,13 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">guardar cambios</button>
       </div>
+      <?php
+
+      $crearUsuario = new ControllerUsers();
+      $crearUsuario -> ctrCrearUsuario();
+
+
+      ?>
   </form>
     </div>
 
