@@ -23,13 +23,14 @@ class ModelUsers{
     static public function mdlIngresarUsuario($tabla,$datos){
 
         //estructura PDO de php para REGISTRAR un usuario 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, usuario, password, perfil) 
-                                              values (:nombre, :usuario, :password, :perfil)"); 
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, usuario, password, perfil, foto) 
+                                              values (:nombre, :usuario, :password, :perfil, :foto)"); 
 
         $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
         $stmt->bindParam(":usuario", $datos["usuario"], PDO::PARAM_STR);
         $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
         $stmt->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
+        $stmt->bindParam(":foto", $datos["ruta"], PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             return "ok";

@@ -124,9 +124,9 @@
           <!-- Campo para Subir la foto-->
           <div class="form-group"> 
             <div class="panel">SUBIR FOTO</div>
-            <input type="file" id="Nuevafoto" name="Nuevafoto">
-            <p class="help-block">peso maximo de la foto 200 MB</p>
-            <img src="view/img/anonymous.png" class="img-thumbnail" width="100px">
+            <input type="file" class="Nuevafoto" name="Nuevafoto">
+            <p class="help-block">peso maximo de la foto 2 MB</p>
+            <img src="view/img/anonymous.png" class="img-thumbnail previsualizar" width="100px">
           </div>
 
         </div>  

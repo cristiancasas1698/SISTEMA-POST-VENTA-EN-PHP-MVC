@@ -109,5 +109,7 @@ echo '</div>';
  
 <!-- ./wrapper -->
 <script src="view/js/plantilla.js"></script>
+<script src="view/js/usuarios.js"></script>
+
 </body>
 </html>
