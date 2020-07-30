@@ -7,6 +7,8 @@ class ControllerUsers{
             if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["inguser"])&& // utilizo expresiones para que solo acepte determinados nuemros y letras
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingpassword"])){  
                 
+                $encriptar = crypt($_POST["ingpassword"],'$2a$07$usesomesillystringforsalt$');
+                
                 $tabla = "usuarios";
 
                 $item = "usuario"; 
@@ -14,7 +16,7 @@ class ControllerUsers{
 
                 $respuesta = ModelUsers::mdlMostrarUsuario($tabla,$item,$valor); // se almacena el metodo mdlMostrarUsuario en la variable $respuesta 
 
-                if($respuesta["usuario"] == $_POST["inguser"] && $respuesta["password"] == $_POST["ingpassword"]){
+                if($respuesta["usuario"] == $_POST["inguser"] && $respuesta["password"] == $encriptar){
                     echo '<br><div class="alert alert-success">bienvenido al sistema</div>';
 
                     $_SESSION["starsesion"] = "ok";
@@ -103,9 +105,11 @@ REGISTRO DE USUARIOS
 
                 
                 $tabla = "usuarios";
+                //encriptar la contraseña del usuario
+                $escriptar = crypt($_POST["Nuevopassword"],'$2a$07$usesomesillystringforsalt$');
                   
                 $datos = array("nombre" => $_POST["Nuevonombre"],"usuario" => $_POST["Nuevousuario"],
-                               "password" => $_POST["Nuevopassword"],"perfil" => $_POST["Nuevoperfil"],
+                               "password" => $escriptar,"perfil" => $_POST["Nuevoperfil"],
                                "ruta" => $ruta);
 
                 $respuesta = ModelUsers::mdlIngresarUsuario($tabla,$datos);
