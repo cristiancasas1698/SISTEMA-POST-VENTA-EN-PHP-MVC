@@ -20,6 +20,11 @@ class ControllerUsers{
                     echo '<br><div class="alert alert-success">bienvenido al sistema</div>';
 
                     $_SESSION["starsesion"] = "ok";
+                    $_SESSION["id"] = $respuesta["id"];
+                    $_SESSION["nombre"] = $respuesta["nombre"];
+                    $_SESSION["usuario"] = $respuesta["usuario"];
+                    $_SESSION["foto"] = $respuesta["foto"];
+                    $_SESSION["perfil"] = $respuesta["perfil"];
 
                     echo '<script>
                               window.location = "home"        
@@ -100,10 +105,7 @@ REGISTRO DE USUARIOS
                     }
                         
                   
-                 }
-
-
-                
+                 }           
                 $tabla = "usuarios";
                 //encriptar la contraseña del usuario
                 $escriptar = crypt($_POST["Nuevopassword"],'$2a$07$usesomesillystringforsalt$');
