@@ -148,7 +148,155 @@ REGISTRO DE USUARIOS
              
      }
  }
-  
+  /*===========================================
+  MOSTRAR USUARIOS EN LA BASE DE DATOS
+  ============================================*/
+  static public function ctrMostrarUsuario($item,$valor){
+
+    $tabla = "usuarios";
+    $respuesta = ModelUsers::mdlMostrarUsuario($tabla,$item,$valor);
+    return $respuesta;
+
+  }
+  /*===========================================
+  EDITAR USUARIOS 
+  ============================================*/
+  static public function ctrEditarUsuario(){
+
+    $ruta = $_POST["fotoActual"];
+
+    if (isset($_POST["Editarusuario"])) {
+        if(preg_match('/^[a-zA-Z ]+$/',$_POST["Editarnombre"])){
+
+           /*===========================================
+           EDITAR IMAGEN DE USUARIO
+           ============================================*/
+           if (isset($_FILES["Editarfoto"]["tmp_name"])) {
+
+            list($ancho,$alto) = getimagesize($_FILES["Editarfoto"]["tmp_name"]);
+
+            $nuevoancho = 500;
+            $nuevoalto = 500;
+
+            var_dump(getimagesize($_FILES["Editarfoto"]["tmp_name"]));
+            /*===========================================
+             CREAMOS UN DIRECTORIO TEMPORAL PARA GUARDAR IMAGENES DE USUARIO
+             ============================================*/
+             $directorio = "view/img/".$_POST["editarusuario"];
+
+
+             if (!empty($_POST["fotoActual"])) {
+               unlink($_POST["fotoActual"]);
+             }else {
+              mkdir($directorio,0755);
+             }
+
+             /*===========================================
+             FUNCIONES DE PHP PARA SUBIR FOTO EN JPG 
+             ============================================*/
+
+             if ($_FILES["Editarfoto"]["type"] == "image/jpeg") {
+                 /*===========================================
+                 GUARDANDO LA IMAGEN DENTRO DEL DIRECTORIO QUE SE CREO
+                 ============================================*/
+
+                 $aleatorio = mt_rand(100,999);
+
+                 $ruta = "view/img/".$_POST["Editarusuario"]."/".$aleatorio.".jpg";
+
+                 $origen = imagecreatefromjpeg($_FILES["Editarfoto"]["tmp_name"]);
+
+                 $destino = imagecreatetruecolor($nuevoancho,$nuevoalto);  
+                 
+                 imagecopyresized ($destino,$origen,0,0,0,0,$nuevoancho,$nuevoalto,$ancho,$alto);
+
+                 imagejpeg($destino,$ruta);
+
+             }elseif ($_FILES["Editarfoto"]["type"] == "image/png") {
+                 
+                 $aleatorio = mt_rand(100,999);
+
+                 $ruta = "view/img/".$_POST["Editarusuario"]."/".$aleatorio.".png";
+
+                 $origen = imagecreatefrompng($_FILES["Editarfoto"]["tmp_name"]);
+
+                 $destino = imagecreatetruecolor($nuevoancho,$nuevoalto);  
+                 
+                 imagecopyresized ($destino,$origen,0,0,0,0,$nuevoancho,$nuevoalto,$ancho,$alto);
+
+                 imagepng($destino,$ruta);
+                 
+             }      
+          } 
+          /*===========================================
+           SE VERIRIFICA SI LA CONTRASEÑA SE CAMBIO SE ENCRIPTA LA NUEVA CONTRASEÑA
+           DE LO CONTRARIO SE DEJA LA CONTRASEÑA COMO ESTABA
+           ============================================*/
+          $tabla = "usuarios";
+          if ($_POST["Editarpassword"] != "") {
+
+            if (preg_match('/^[a-zA-Z0-9 ]+$/',$_POST["Editarpassword"])) {
+
+              $escriptar = crypt($_POST["Editarpassword"],'$2a$07$usesomesillystringforsalt$');
+            }else {
+              echo "<script>
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'la contraseña no puede llevar caracteres especiales'
+              }).then((result)=>{
+                if (result.value) {
+                    window.location = 'users';
+                  }
+                 }
+                )
+              </script>";
+              
+            }
+          }else {
+            $escriptar = $passwordActual;
+          }
+          $datos = array("nombre" => $_POST["Editarnombre"],
+                        "usuario" => $_POST["Editarusuario"],
+                        "password" => $escriptar,
+                        "perfil" => $_POST["Editarperfil"],
+                         "ruta" => $ruta);
+
+          $respuesta = ModelUsers::mdlEditarUsuario($tabla,$datos);
+
+          if ($respuesta == "ok") {
+            echo "<script>
+          Swal.fire({
+            icon: 'success',
+            title: 'Excelente',
+            text: 'el usuario ha sido actualizado correctamente'
+          }).then((result)=>{
+            if (result.value) {
+                window.location = 'users';
+              }
+             }
+            )
+          </script>";
+        }else {
+          echo "<script>
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'el nombre no puede ir vacion o llevar caracteres especiales'
+                  }).then((result)=>{
+                    if (result.value) {
+                        window.location = 'users';
+                      }
+                     }
+                    )
+                  </script>";
+        }
+
+         }
+
+    }
+  }
+
 }
 
 ?>

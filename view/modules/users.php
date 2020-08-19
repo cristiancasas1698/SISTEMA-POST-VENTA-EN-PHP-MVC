@@ -41,21 +41,44 @@
               </tr>
             </thead>
               <body>
-                <tr>
-                  <td>1</td>
-                  <td>Ususario Administrador</td>
-                  <td>Admin</td>
-                  <td><img src="view/img/anonymous.png" class="img-thumbnail" width="40px"></td>
-                  <td>Administrador</td>
+
+              <?php
+                 $item = null;
+                 $valor = null;
+
+                 $usuarios = ControllerUsers::ctrMostrarUsuario($item,$valor);
+
+          
+
+                 foreach ($usuarios as $key => $value) {
+
+                  echo'<tr>
+                  <td>'.$value["id"].'</td>
+                  <td>'.$value["nombre"].'</td>
+                  <td>'.$value["usuario"].'</td>';
+                  if ($value["foto"] != "") {
+                    echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                  }else{
+                    echo'<td><img src="view/img/anonymous.png" class="img-thumbnail" width="40px"></td>';
+                  }
+                
+                  echo '<td>'.$value["perfil"].'</td>
                   <td><button class="btn btn-success btn-xs">Activado</button></td>
-                  <td>2020-02-02 12:05:37</td>
+                  <td>'.$value["ultimo_login"].'</td>
                   <td>
                     <div class="btn-group">
-                      <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#ModalEditarUsuario"><i class="fa fa-pencil"></i></button>
                       <button class="btn btn-danger"><i class="fa fa-times"></i></button>
                     </div>
                   </td>
-                </tr>
+                </tr>';
+                   
+                 }
+
+
+
+              ?>
+                
               </body>
           </table>
         </div>
@@ -63,7 +86,9 @@
     </section>
   </div>
 
-  <!-- modal para registrar un usuario nuevo -->
+<!--===========================================
+MODAL PARA CREAR USUARIOS
+============================================-->
 
   <div id="modalAgregarUsuario" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -145,6 +170,99 @@
       ?>
   </form>
     </div>
+
+  </div>
+</div>
+
+
+<!--===========================================
+MODAL PARA EDITAR USUARIO
+============================================-->
+
+<div id="ModalEditarUsuario" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- contenido del modal y del titulo-->
+        <div class="modal-content"> 
+
+    <!-- form para poder trabajar el formulario de registro -->
+    <!-- use multipart/form-datacuando su formulario incluya cualquier <input type="file">elemento -->
+      <form action="" role="form" method="post" enctype="multipart/form-data">
+
+        <div class="modal-header" style="background:#3c8dbc; color:white; ">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Editar Usuarios</h4>
+        </div>
+
+      <!-- Cuerpo del modal-->
+        <div class="modal-body">
+          <div class="box-body">
+
+            <!-- Campo del Nombre-->
+            <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              <input type="text" class="form-control input-lg" name="Editarnombre" id="Editarnombre" value="" required>
+            </div>
+          </div>
+
+          <!-- Campo del Nombre de usuario-->
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-key"></i></span>
+              <input type="text" class="form-control input-lg" name="Editarusuario" id="Editarusuario" value="" readonly>
+            </div>
+          </div>
+
+           <!-- Campo de contraseña-->
+           <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+              <input type="password" class="form-control input-lg" name="Editarpassword" placeholder="escriba la nueva contraseña" required>
+              <input type="hidden" id="passwordActual" name="passwordActual">
+            </div>
+          </div>
+
+          <!-- Campo de perfil !se coloco en un select¡-->
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-users"></i></span>
+              <select name="Editarperfil" class="form-control input-lg">
+                <option value="" id="Editarperfil"> </option>
+                <option value="Administrador">Administrador</option>
+                <option value="Especial">Especial</option>
+                <option value="Vendedor">Vendedor</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Campo para Subir la foto-->
+          <div class="form-group"> 
+            <div class="panel">SUBIR FOTO</div>
+            <input type="file" class="Nuevafoto" name="Editarfoto">
+            <p class="help-block">peso maximo de la foto 2 MB</p>
+            <img src="view/img/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+            <input type="hidden" name="fotoActual"  id="fotoActual">
+          </div>
+
+        </div>  
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Actualizar usuario</button>
+      </div>
+      <?php
+
+
+      //los metodos que nos permiten hacer UPDATE al usuario desde user.controller
+      $editarUsuario = new ControllerUsers();
+      $editarUsuario -> ctrEditarUsuario();
+
+
+       ?>
+    </form>
+   </div>
 
   </div>
 </div>

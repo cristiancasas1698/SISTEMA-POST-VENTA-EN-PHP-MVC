@@ -35,3 +35,46 @@ $(".Nuevafoto").change(function() {
         }); 
     }
 });
+
+/*===========================================
+EDITAR USUARIO
+============================================*/
+
+$(".btnEditarUsuario").click(function () { 
+    var idUsuario = $(this).attr("idUsuario");
+    var datos = new FormData();
+
+    datos.append("idUsuario",idUsuario);
+
+    $.ajax({
+        url: "ajax/usuarios.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function (response) {
+
+            console.log("respuesta",response);
+
+            $("#Editarnombre").val(response["nombre"]);
+            $("#Editarusuario").val(response["usuario"]);
+            $("#Editarperfil").html(response["perfil"]);
+            $("#Editarperfil").val(response["perfil"]);
+            $("#fotoActual").val(response["foto"]);
+
+            $("#passwordActual").val(response["password"]);
+           
+            
+
+
+            if (response["foto"] != "") {
+                $(".previsualizar").attr("src",response["foto"]);  
+                
+            }
+            
+        }
+    });
+    
+});
