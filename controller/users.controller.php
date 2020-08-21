@@ -17,18 +17,27 @@ class ControllerUsers{
                 $respuesta = ModelUsers::mdlMostrarUsuario($tabla,$item,$valor); // se almacena el metodo mdlMostrarUsuario en la variable $respuesta 
 
                 if($respuesta["usuario"] == $_POST["inguser"] && $respuesta["password"] == $encriptar){
-                    echo '<br><div class="alert alert-success">bienvenido al sistema</div>';
 
-                    $_SESSION["starsesion"] = "ok";
-                    $_SESSION["id"] = $respuesta["id"];
-                    $_SESSION["nombre"] = $respuesta["nombre"];
-                    $_SESSION["usuario"] = $respuesta["usuario"];
-                    $_SESSION["foto"] = $respuesta["foto"];
-                    $_SESSION["perfil"] = $respuesta["perfil"];
+                     // SE VERIFICA SI EL USUARIO ESTA ACTIVADO O NO
+                    if ($respuesta["estado"] == 1) {
+                      $_SESSION["starsesion"] = "ok";
+                      $_SESSION["id"] = $respuesta["id"];
+                      $_SESSION["nombre"] = $respuesta["nombre"];
+                      $_SESSION["usuario"] = $respuesta["usuario"];
+                      $_SESSION["foto"] = $respuesta["foto"];
+                      $_SESSION["perfil"] = $respuesta["perfil"];
+                      echo '<br><div class="alert alert-success">bienvenido al sistema</div>';
 
-                    echo '<script>
-                              window.location = "home"        
-                         </script>';
+
+                        echo '<script>
+                                  window.location = "home"        
+                             </script>';                    
+                    }else {
+                      echo '<br><div class="alert alert-danger">El usuario no esta activado, 
+                             comuniquese con el administrador</div>';
+                    }
+
+                    
 
                 }else{
                     echo '<br><div class="alert alert-danger">Error al ingresar, vuelve a intentarlo</div>';
@@ -163,7 +172,7 @@ REGISTRO DE USUARIOS
   ============================================*/
   static public function ctrEditarUsuario(){
 
-    $ruta = $_POST["fotoActual"];
+    
 
     if (isset($_POST["Editarusuario"])) {
         if(preg_match('/^[a-zA-Z ]+$/',$_POST["Editarnombre"])){
@@ -171,7 +180,8 @@ REGISTRO DE USUARIOS
            /*===========================================
            EDITAR IMAGEN DE USUARIO
            ============================================*/
-           if (isset($_FILES["Editarfoto"]["tmp_name"])) {
+           $ruta = $_POST["fotoActual"];
+           if (isset($_FILES["Editarfoto"]["tmp_name"]) && !empty($_FILES["Editarfoto"]["tmp_name"])) {
 
             list($ancho,$alto) = getimagesize($_FILES["Editarfoto"]["tmp_name"]);
 
